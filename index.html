@@ -315,11 +315,31 @@
             height: 100%;
             border-radius: 50%;
         }
-        @media (max-width: 768px) {
+      /* للموبايل العادي (عرض أقل من 768px) */
+@media (max-width: 768px) {
     .menu-items-grid {
-        grid-template-columns: 2fr !important; /* قائمة عمودية لكل عنصر */
+        display: grid !important; /* تأكد أنه grid */
+        grid-template-columns: repeat(2, 1fr); /* كارتين في الصف */
         gap: 15px;
     }
+
+    .menu-item img {
+        height: auto;
+    }
+
+    .home-banner {
+        padding: 60px 20px;
+    }
+}
+
+/* للهواتف الصغيرة جدًا (أقل من 480px) */
+@media (max-width: 480px) 
+    .menu-items-grid {
+        grid-template-columns: 1fr; /* كارت واحد في الصف */
+        gap: 12px;
+    }
+}
+
 
     .home-banner {
         padding: 60px 20px; /* تصغير البانر ليكون مناسب للموبايل */
@@ -339,14 +359,7 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-            }
-            .nav-menu a {
-                margin: 10px 10px 0 10px;
-            }
-        }
+    
     </style>
 </head>
 <body>
@@ -417,9 +430,6 @@
 
     </main>
 
-    <footer>
-        <p>© 2025 مطعم البركة - جميع الحقوق محفوظة</p>
-    </footer>
 
     <a href="https://instagram.com/mostafa_syr_57" target="_blank" class="insta-icon">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
@@ -685,6 +695,7 @@ window.addEventListener('scroll', () => {
     </script>
 </body>
 </html>
+
 
 
 
