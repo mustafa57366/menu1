@@ -650,7 +650,26 @@
         document.addEventListener('DOMContentLoaded', () => {
             showSection('home');
         });
+        let lastScroll = 0;
+const header = document.querySelector('.header');
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScroll) {
+        // التمرير لأسفل → اخفاء الهيدر
+        header.style.transform = 'translateY(-100%)';
+        header.style.transition = 'transform 0.3s ease';
+    } else {
+        // التمرير لأعلى → اظهار الهيدر
+        header.style.transform = 'translateY(0)';
+    }
+
+    lastScroll = currentScroll <= 0 ? 0 : currentScroll; // لمنع القيم السالبة
+});
+
     </script>
 </body>
 </html>
+
 
