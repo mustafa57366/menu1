@@ -121,16 +121,13 @@
             margin-bottom: 40px;
             border-radius: 12px;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
-            /* خصائص التوسيط */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            text-align: center;
             animation: fadeIn 0.8s ease-in-out forwards;
         }
         .menu-section.active {
-            display: flex;
+            display: block;
         }
-        
+
         .section-title {
             color: var(--primary-color);
             font-size: 2.5em;
@@ -149,10 +146,11 @@
         }
 
         .menu-items-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* صفين */
+    gap: 30px;
+    justify-content: center; /* تمركز الكاردات في المنتصف */
+}
 
         .menu-item {
             background-color: var(--secondary-color);
@@ -310,17 +308,13 @@
         @media (max-width: 768px) {
             .header {
                 flex-direction: column;
-                padding: 15px 20px;
             }
             .nav-menu a {
-                margin: 5px;
-            }
-            .menu-items-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
+                margin: 10px 10px 0 10px;
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 </head>
 <body>
     <header class="header">
@@ -434,8 +428,7 @@
                 { id: 23, name: 'آيس كريم بالحليب', image: 'ice-cream.jpg', price: 7 },
                 { id: 24, name: 'آيس كريم بالفراولة', image: 'ice-cream3.jpg', price: 7 },
                 { id: 25, name: 'آيس كريم بالكراميل', image: 'ice-cream4.jpg', price: 8 },
-                { id: 26, name: 'آيس كريم بالكاكاو والحليب', image: 'ice-cream5.jpg', price: 9 },
-                { id: 27, name: 'آيس كريم بالكاكاو', image: 'ice-cream6.jpg', price: 7 },
+                
                 { id: 28, name: 'آيس كريم بالفراولة', image: 'ice-cream7.jpg', price: 7 },
                 { id: 29, name: 'آيس كريم بالكاكاو والحليب', image: 'ice-cream8.jpg', price: 9 },
                 { id: 30, name: 'آيس كريم بالتوت البري', image: 'ice-cream9.jpg', price: 8 },
@@ -513,7 +506,8 @@
             }
             totalElement.textContent = `${totalPrice}$`;
         }
-        
+
+        // عرض ملخص الطلب في صفحة "تم الاستلام"
         function renderOrderReceptionPage() {
             const receptionList = document.querySelector('.reception-items');
             const totalElement = document.querySelector('#order-reception-page .total-price span');
@@ -562,6 +556,7 @@
             }
         }
 
+        // روابط القائمة
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -572,21 +567,26 @@
             });
         });
         
+        // زر اتمام الطلب
         document.querySelector('.checkout-btn').addEventListener('click', (e) => {
             e.preventDefault();
             showSection('checkout-page');
         });
 
+        // ✅ زر تأكيد الطلب — (تخزين الطلب لصفحة kitchen.html)
         document.querySelector('.confirm-order-btn').addEventListener('click', () => {
             const selectedItemIds = Object.keys(cart);
             if (selectedItemIds.length === 0) return;
 
+            const orderItems = selectedItemIds.map(id => allMenuItems[id].name);
+            const totalPrice = selectedItemIds.reduce((sum, id) => sum + allMenuItems[id].price, 0);
+
             const tableNumber = prompt("🪑 أدخل رقم الطاولة:");
             const order = {
                 table: tableNumber || "غير محدد",
-                items: selectedItemIds.map(id => allMenuItems[id].name),
-                notes: "",
-                total: selectedItemIds.reduce((sum, id) => sum + allMenuItems[id].price, 0),
+                items: orderItems,
+                notes: "",          // تركناها فاضية (الكitchen يعرضها)
+                total: totalPrice,
                 timestamp: Date.now()
             };
 
@@ -594,13 +594,16 @@
             orders.push(order);
             localStorage.setItem("orders", JSON.stringify(orders));
 
+            // بعد الحفظ نعرض صفحة تم الاستلام (والملخص يستخدم السلة الحالية)
             showSection('order-reception-page');
         });
 
+        // العودة للقائمة من صفحة اتمام الطلب
         document.querySelector('.back-btn').addEventListener('click', () => {
             showSection('home');
         });
 
+        // زر "طلب جديد" يمسح السلة فقط
         document.querySelector('.new-order-btn').addEventListener('click', () => {
             for (const key in cart) {
                 delete cart[key];
@@ -610,6 +613,7 @@
             showSection('home');
         });
 
+        // اختيار/إلغاء اختيار المنتج بالضغط على الكارد
         document.addEventListener('click', (event) => {
             const target = event.target.closest('.menu-item');
             if (target) {
@@ -625,9 +629,9 @@
             }
         });
 
+        // البداية على الرئيسية
         document.addEventListener('DOMContentLoaded', () => {
-            // فتح قائمة الطعام تلقائيًا
-            showSection('food');
+            showSection('home');
         });
     </script>
 </body>
