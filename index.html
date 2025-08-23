@@ -305,14 +305,31 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-            }
-            .nav-menu a {
-                margin: 10px 10px 0 10px;
-            }
-        }
+   @media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start; /* جعل المحتوى يبدأ من اليمين */
+        padding: 20px;
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-direction: column; /* جعل الروابط عمودية */
+        width: 100%;
+    }
+
+    .nav-menu a {
+        margin: 10px 0; /* مسافة بين الأزرار */
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-menu .checkout-btn {
+        margin-top: 15px;
+    }
+}
+
+        
     </style>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 </head>
@@ -636,3 +653,4 @@
     </script>
 </body>
 </html>
+
