@@ -8,6 +8,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: top 0.3s ease; /* تأثير سلس للظهور والاختفاء */
+}
+
         .nav-menu {
     display: flex;
     flex-wrap: wrap;
@@ -657,9 +665,27 @@
         document.addEventListener('DOMContentLoaded', () => {
             showSection('home');
         });
+        let lastScrollTop = 0;
+const header = document.querySelector('.header');
+
+window.addEventListener('scroll', () => {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > lastScrollTop) {
+        // التمرير للأسفل → اخفاء الهيدر
+        header.style.top = '-100px';
+    } else {
+        // التمرير للأعلى → اظهار الهيدر
+        header.style.top = '0';
+    }
+    
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // لتجنب القيم السالبة
+});
+
     </script>
 </body>
 </html>
+
 
 
 
