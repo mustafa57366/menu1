@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة المطبخ | طلبات الزبائن</title>
+  <style>
+    body {
+      font-family: "Tahoma", sans-serif;
+      background: #f8f8f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 22px;
+    }
+
+    .order {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: 15px;
+      padding: 15px;
+    }
+
+    .order h3 {
+      margin: 0;
+      color: #444;
+    }
+
+    .order p {
+      margin: 8px 0;
+      font-size: 15px;
+    }
+
+    .btn {
+      background: #28a745;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      background: #218838;
+    }
+
+    .empty {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 18px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    🍴 لوحة طلبات المطبخ
+  </header>
+
+  <div id="ordersList"></div>
+
+  <script>
+    // تحميل الطلبات من LocalStorage
+    function loadOrders() {
+      let orders = JSON.parse(localStorage.getItem("orders")) || [];
+      let listDiv = document.getElementById("ordersList");
+      listDiv.innerHTML = "";
+
+      if (orders.length === 0) {
+        listDiv.innerHTML = "<p class='empty'>لا توجد طلبات حالياً 🚫</p>";
+        return;
+      }
+
+      orders.forEach((order, index) => {
+        let div = document.createElement("div");
+        div.className = "order";
+        div.innerHTML = `
+          <h3>🪑 طاولة رقم: ${order.table}</h3>
+          <p>🍽️ الطلب: ${order.items.join(", ")}</p>
+          <p>📝 ملاحظات: ${order.notes}</p>
+          <button class="btn" onclick="markPrepared(${index})">✅ تم التحضير</button>
+        `;
+        listDiv.appendChild(div);
+      });
+    }
+
+    // عند تجهيز الطلب → نحذفه
+    function markPrepared(i) {
+      let orders = JSON.parse(localStorage.getItem("orders")) || [];
+      orders.splice(i, 1); // حذف الطلب
+      localStorage.setItem("orders", JSON.stringify(orders));
+      loadOrders();
+    }
+
+    // تحميل الطلبات عند فتح الصفحة
+    loadOrders();
+
+    // تحديث تلقائي كل 5 ثواني (في حال في طلب جديد)
+    setInterval(loadOrders, 5000);
+  </script>
+
+</body>
+</html>
