@@ -8,27 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        .header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    transition: top 0.3s ease; /* تأثير سلس للظهور والاختفاء */
-}
-
-        .nav-menu {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px; /* تقليل المسافة بين الأزرار */
-}
-
-.nav-menu a {
-    padding: 8px 15px; /* تصغير حجم الزر */
-    font-size: 0.9em;
-    margin: 5px 5px 0 0;
-}
-
         :root {
             --primary-color: #6a1b2a;
             --secondary-color: #fce4ec;
@@ -315,40 +294,6 @@
             height: 100%;
             border-radius: 50%;
         }
-      /* للموبايل العادي (عرض أقل من 768px) */
-@media (max-width: 768px) {
-    .menu-items-grid {
-        display: grid !important; /* تأكد أنه grid */
-        grid-template-columns: repeat(2, 1fr); /* كارتين في الصف */
-        gap: 15px;
-    }
-
-    .menu-item img {
-        height: auto;
-    }
-
-    .home-banner {
-        padding: 60px 20px;
-    }
-}
-
-/* للهواتف الصغيرة جدًا (أقل من 480px) */
-@media (max-width: 480px) 
-    .menu-items-grid {
-        grid-template-columns: 1fr; /* كارت واحد في الصف */
-        gap: 12px;
-    }
-}
-
-
-    .home-banner {
-        padding: 60px 20px; /* تصغير البانر ليكون مناسب للموبايل */
-    }
-
-    .menu-item img {
-        height: auto;
-    }
-}
 
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -359,15 +304,22 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-    
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+            }
+            .nav-menu a {
+                margin: 10px 10px 0 10px;
+            }
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 </head>
 <body>
     <header class="header">
         <h1 class="logo">مطعم البركة</h1>
-        <br>
         <nav class="nav-menu">
-           
+            <a href="#" data-target="home">الرئيسية</a>
             <a href="#" data-target="cocktails">الكوكتيلات</a>
             <a href="#" data-target="food">الطعام</a>
             <a href="#" data-target="desserts">الحلويات</a>
@@ -431,8 +383,11 @@
 
     </main>
 
+    <footer>
+        <p>© 2025 مطعم البركة - جميع الحقوق محفوظة</p>
+    </footer>
 
-    <a href="https://instagram.com/mostafa_syr_57" target="_blank" class="insta-icon">
+    <a href="https://instagram.com/mostafa_syr_573" target="_blank" class="insta-icon">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
     </a>
 
@@ -472,6 +427,7 @@
                 { id: 23, name: 'آيس كريم بالحليب', image: 'ice-cream.jpg', price: 7 },
                 { id: 24, name: 'آيس كريم بالفراولة', image: 'ice-cream3.jpg', price: 7 },
                 { id: 25, name: 'آيس كريم بالكراميل', image: 'ice-cream4.jpg', price: 8 },
+                
                 { id: 28, name: 'آيس كريم بالفراولة', image: 'ice-cream7.jpg', price: 7 },
                 { id: 29, name: 'آيس كريم بالكاكاو والحليب', image: 'ice-cream8.jpg', price: 9 },
                 { id: 30, name: 'آيس كريم بالتوت البري', image: 'ice-cream9.jpg', price: 8 },
@@ -676,23 +632,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             showSection('home');
         });
-        let lastScrollTop = 0;
-const header = document.querySelector('.header');
-
-window.addEventListener('scroll', () => {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    if (scrollTop > lastScrollTop) {
-        // التمرير للأسفل → اخفاء الهيدر
-        header.style.top = '-100px';
-    } else {
-        // التمرير للأعلى → اظهار الهيدر
-        header.style.top = '0';
-    }
-    
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // لتجنب القيم السالبة
-});
-
     </script>
 </body>
 </html>
