@@ -121,13 +121,16 @@
             margin-bottom: 40px;
             border-radius: 12px;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
-            text-align: center;
+            /* خصائص التوسيط */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             animation: fadeIn 0.8s ease-in-out forwards;
         }
         .menu-section.active {
-            display: block;
+            display: flex;
         }
-
+        
         .section-title {
             color: var(--primary-color);
             font-size: 2.5em;
@@ -307,9 +310,14 @@
         @media (max-width: 768px) {
             .header {
                 flex-direction: column;
+                padding: 15px 20px;
             }
             .nav-menu a {
-                margin: 10px 10px 0 10px;
+                margin: 5px;
+            }
+            .menu-items-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
             }
         }
     </style>
@@ -618,7 +626,8 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            showSection('home');
+            // فتح قائمة الطعام تلقائيًا
+            showSection('food');
         });
     </script>
 </body>
