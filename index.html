@@ -8,6 +8,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        .nav-menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px; /* تقليل المسافة بين الأزرار */
+}
+
+.nav-menu a {
+    padding: 8px 15px; /* تصغير حجم الزر */
+    font-size: 0.9em;
+    margin: 5px 5px 0 0;
+}
+
         :root {
             --primary-color: #6a1b2a;
             --secondary-color: #fce4ec;
@@ -294,6 +307,20 @@
             height: 100%;
             border-radius: 50%;
         }
+        @media (max-width: 768px) {
+    .menu-items-grid {
+        grid-template-columns: 1fr !important; /* قائمة عمودية لكل عنصر */
+        gap: 15px;
+    }
+
+    .home-banner {
+        padding: 60px 20px; /* تصغير البانر ليكون مناسب للموبايل */
+    }
+
+    .menu-item img {
+        height: auto;
+    }
+}
 
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -633,5 +660,6 @@
     </script>
 </body>
 </html>
+
 
 
