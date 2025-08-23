@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
             --primary-color: #6a1b2a;
@@ -21,6 +22,7 @@
             margin: 0;
             padding: 0;
             color: var(--text-color);
+            overflow-x: hidden; /* لمنع ظهور شريط التمرير الأفقي */
         }
 
         .header {
@@ -43,38 +45,75 @@
             letter-spacing: 1px;
         }
 
-        .nav-menu a {
+        .sidebar-toggle {
+            font-size: 1.5em;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+        .sidebar-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1001;
+            top: 0;
+            right: 0;
+            background-color: #fff;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            box-shadow: -4px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar.open {
+            width: 250px;
+        }
+        
+        .sidebar a, .sidebar .checkout-btn {
+            padding: 15px 25px;
             text-decoration: none;
-            color: #fff;
-            background-color: var(--primary-color);
-            padding: 10px 20px;
-            border-radius: 25px;
+            font-size: 1.1em;
+            color: var(--text-color);
+            display: block;
+            transition: 0.3s;
+            border-bottom: 1px solid #eee;
+            margin: 10px;
+            border-radius: 8px;
             font-weight: 700;
-            margin-right: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .nav-menu a:hover {
-            background-color: #4a121e;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        .sidebar a:hover, .sidebar .checkout-btn:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
         }
-
-        .nav-menu a.active-link {
-            background-color: var(--text-color);
+        
+        .sidebar a.active-link {
+            background-color: var(--primary-color);
             color: #fff;
         }
         
-        .nav-menu .checkout-btn {
+        .sidebar .checkout-btn {
             background-color: #4caf50;
-            border-radius: 25px;
-            font-size: 1em;
-            padding: 10px 20px;
-            transition: background-color 0.3s ease;
+            color: #fff;
+            text-align: center;
+            border-bottom: none;
         }
-        .nav-menu .checkout-btn:hover {
+        .sidebar .checkout-btn:hover {
             background-color: #43a047;
+            color: #fff;
+        }
+        
+        .sidebar .close-btn {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 2em;
+            color: var(--text-color);
+            cursor: pointer;
         }
 
         .container {
@@ -121,13 +160,14 @@
             margin-bottom: 40px;
             border-radius: 12px;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
-            text-align: center;
+            flex-direction: column;
+            align-items: center;
             animation: fadeIn 0.8s ease-in-out forwards;
         }
         .menu-section.active {
-            display: block;
+            display: flex;
         }
-
+        
         .section-title {
             color: var(--primary-color);
             font-size: 2.5em;
@@ -146,11 +186,10 @@
         }
 
         .menu-items-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* صفين */
-    gap: 30px;
-    justify-content: center; /* تمركز الكاردات في المنتصف */
-}
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
 
         .menu-item {
             background-color: var(--secondary-color);
@@ -304,48 +343,39 @@
             from { opacity: 0; transform: translateX(50px); }
             to { opacity: 1; transform: translateX(0); }
         }
-
-   @media (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        align-items: flex-start; /* جعل المحتوى يبدأ من اليمين */
-        padding: 20px;
-    }
-
-    .nav-menu {
-        display: flex;
-        flex-direction: column; /* جعل الروابط عمودية */
-        width: 100%;
-    }
-
-    .nav-menu a {
-        margin: 10px 0; /* مسافة بين الأزرار */
-        width: 100%;
-        text-align: center;
-    }
-
-    .nav-menu .checkout-btn {
-        margin-top: 15px;
-    }
-}
-
         
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            .menu-items-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .sidebar.open {
+                width: 100%;
+            }
+        }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 </head>
 <body>
     <header class="header">
         <h1 class="logo">مطعم البركة</h1>
-        <nav class="nav-menu">
-            <a href="#" data-target="home">الرئيسية</a>
-            <a href="#" data-target="cocktails">الكوكتيلات</a>
-            <a href="#" data-target="food">الطعام</a>
-            <a href="#" data-target="desserts">الحلويات</a>
-            <a href="#" data-target="coffee">القهوة</a>
-            <a href="#" data-target="ice-cream">الآيس كريم</a>
-            <a href="#" class="checkout-btn">اتمام الطلب</a>
-        </nav>
+        <div class="sidebar-toggle" id="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
     </header>
+
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" id="close-sidebar">&times;</a>
+        <a href="#" data-target="home">الرئيسية</a>
+        <a href="#" data-target="cocktails">الكوكتيلات</a>
+        <a href="#" data-target="food">الطعام</a>
+        <a href="#" data-target="desserts">الحلويات</a>
+        <a href="#" data-target="coffee">القهوة</a>
+        <a href="#" data-target="ice-cream">الآيس كريم</a>
+        <a href="#" class="checkout-btn">اتمام الطلب</a>
+    </div>
 
     <main class="container">
         <section id="home" class="menu-section">
@@ -398,7 +428,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer>
@@ -406,7 +435,7 @@
     </footer>
 
     <a href="https://instagram.com/mostafa_syr_573" target="_blank" class="insta-icon">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+        <i class="fab fa-instagram fa-2x" style="color: #6a1b2a;"></i>
     </a>
 
     <script>
@@ -445,7 +474,8 @@
                 { id: 23, name: 'آيس كريم بالحليب', image: 'ice-cream.jpg', price: 7 },
                 { id: 24, name: 'آيس كريم بالفراولة', image: 'ice-cream3.jpg', price: 7 },
                 { id: 25, name: 'آيس كريم بالكراميل', image: 'ice-cream4.jpg', price: 8 },
-                
+                { id: 26, name: 'آيس كريم بالكاكاو والحليب', image: 'ice-cream5.jpg', price: 9 },
+                { id: 27, name: 'آيس كريم بالكاكاو', image: 'ice-cream6.jpg', price: 7 },
                 { id: 28, name: 'آيس كريم بالفراولة', image: 'ice-cream7.jpg', price: 7 },
                 { id: 29, name: 'آيس كريم بالكاكاو والحليب', image: 'ice-cream8.jpg', price: 9 },
                 { id: 30, name: 'آيس كريم بالتوت البري', image: 'ice-cream9.jpg', price: 8 },
@@ -523,8 +553,7 @@
             }
             totalElement.textContent = `${totalPrice}$`;
         }
-
-        // عرض ملخص الطلب في صفحة "تم الاستلام"
+        
         function renderOrderReceptionPage() {
             const receptionList = document.querySelector('.reception-items');
             const totalElement = document.querySelector('#order-reception-page .total-price span');
@@ -553,10 +582,10 @@
         
         function showSection(targetId) {
             hideAllSections();
-            document.querySelectorAll('.nav-menu a').forEach(link => {
+            document.querySelectorAll('.sidebar a').forEach(link => {
                 link.classList.remove('active-link');
             });
-            const activeLink = document.querySelector(`[data-target="${targetId}"]`);
+            const activeLink = document.querySelector(`.sidebar a[data-target="${targetId}"]`);
             if (activeLink) {
                 activeLink.classList.add('active-link');
             }
@@ -573,37 +602,33 @@
             }
         }
 
-        // روابط القائمة
-        document.querySelectorAll('.nav-menu a').forEach(link => {
+        document.querySelectorAll('.sidebar a').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetId = link.getAttribute('data-target');
                 if (targetId) {
                     showSection(targetId);
+                    closeSidebar();
                 }
             });
         });
         
-        // زر اتمام الطلب
         document.querySelector('.checkout-btn').addEventListener('click', (e) => {
             e.preventDefault();
             showSection('checkout-page');
+            closeSidebar();
         });
 
-        // ✅ زر تأكيد الطلب — (تخزين الطلب لصفحة kitchen.html)
         document.querySelector('.confirm-order-btn').addEventListener('click', () => {
             const selectedItemIds = Object.keys(cart);
             if (selectedItemIds.length === 0) return;
 
-            const orderItems = selectedItemIds.map(id => allMenuItems[id].name);
-            const totalPrice = selectedItemIds.reduce((sum, id) => sum + allMenuItems[id].price, 0);
-
             const tableNumber = prompt("🪑 أدخل رقم الطاولة:");
             const order = {
                 table: tableNumber || "غير محدد",
-                items: orderItems,
-                notes: "",          // تركناها فاضية (الكitchen يعرضها)
-                total: totalPrice,
+                items: selectedItemIds.map(id => allMenuItems[id].name),
+                notes: "",
+                total: selectedItemIds.reduce((sum, id) => sum + allMenuItems[id].price, 0),
                 timestamp: Date.now()
             };
 
@@ -611,16 +636,13 @@
             orders.push(order);
             localStorage.setItem("orders", JSON.stringify(orders));
 
-            // بعد الحفظ نعرض صفحة تم الاستلام (والملخص يستخدم السلة الحالية)
             showSection('order-reception-page');
         });
 
-        // العودة للقائمة من صفحة اتمام الطلب
         document.querySelector('.back-btn').addEventListener('click', () => {
             showSection('home');
         });
 
-        // زر "طلب جديد" يمسح السلة فقط
         document.querySelector('.new-order-btn').addEventListener('click', () => {
             for (const key in cart) {
                 delete cart[key];
@@ -630,7 +652,6 @@
             showSection('home');
         });
 
-        // اختيار/إلغاء اختيار المنتج بالضغط على الكارد
         document.addEventListener('click', (event) => {
             const target = event.target.closest('.menu-item');
             if (target) {
@@ -646,32 +667,21 @@
             }
         });
 
-        // البداية على الرئيسية
+        function openSidebar() {
+            document.getElementById("sidebar").classList.add('open');
+        }
+
+        function closeSidebar() {
+            document.getElementById("sidebar").classList.remove('open');
+        }
+
+        document.getElementById("sidebar-toggle").addEventListener('click', openSidebar);
+        document.getElementById("close-sidebar").addEventListener('click', closeSidebar);
+        
         document.addEventListener('DOMContentLoaded', () => {
             showSection('home');
         });
-        let lastScroll = 0;
-const header = document.querySelector('.header');
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (currentScroll > lastScroll) {
-        // التمرير لأسفل → اخفاء الهيدر
-        header.style.transform = 'translateY(-100%)';
-        header.style.transition = 'transform 0.3s ease';
-    } else {
-        // التمرير لأعلى → اظهار الهيدر
-        header.style.transform = 'translateY(0)';
-    }
-
-    lastScroll = currentScroll <= 0 ? 0 : currentScroll; // لمنع القيم السالبة
-});
 
     </script>
 </body>
 </html>
-
-
-
-
