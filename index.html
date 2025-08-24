@@ -437,8 +437,7 @@
     <a href="https://instagram.com/mostafa_syr_573" target="_blank" class="insta-icon">
         <i class="fab fa-instagram fa-2x" style="color: #6a1b2a;"></i>
     </a>
-    <script>
-const menuData = {
+ const menuData = {
     cocktails: [
         { id: 1, name: 'كوكتيل ب كاكاو', image: '1.jpg', price: 12 },
         { id: 2, name: 'كوكتيل بالفراولة', image: '2.jpg', price: 10 },
@@ -553,7 +552,6 @@ function renderCheckoutPage() {
     totalElement.textContent = `${totalPrice}$`;
 }
 
-// *** تم تعديل هذه الدالة لإرسال الطلب إلى API بدلاً من localStorage ***
 function confirmOrder() {
     const selectedItemIds = Object.keys(cart);
     if (selectedItemIds.length === 0) return;
@@ -570,7 +568,6 @@ function confirmOrder() {
         total: selectedItemIds.reduce((sum, id) => sum + allMenuItems[id].price, 0),
     };
 
-    // إرسال الطلب إلى خادم API
     fetch('http://localhost:3000/api/v1/orders', {
         method: 'POST',
         headers: {
@@ -585,19 +582,17 @@ function confirmOrder() {
         return response.json();
     })
     .then(data => {
-        alert('✅ تم استلام طلبك بنجاح! ');
+        alert('✅ تم استلام طلبك بنجاح!');
         console.log('الطلب:', data.order);
-        // مسح سلة المشتريات بعد إرسال الطلب
         for (const key in cart) { delete cart[key]; }
-        updateCartCount(); // تحديث عدد العناصر في السلة
-        showSection('home'); // العودة إلى الصفحة الرئيسية
+        updateCartCount();
+        showSection('home');
     })
     .catch((error) => {
         console.error('حدث خطأ:', error);
         alert('❌ فشل إرسال الطلب. يرجى المحاولة مرة أخرى.');
     });
 }
-// *** نهاية التعديل ***
 
 function renderOrderReceptionPage() {
     const receptionList = document.querySelector('.reception-items');
@@ -664,9 +659,7 @@ document.querySelector('.checkout-btn').addEventListener('click', (e) => {
     closeSidebar();
 });
 
-// *** تغيير المستمع لزر التأكيد ***
 document.querySelector('.confirm-order-btn').addEventListener('click', confirmOrder);
-// *** نهاية التغيير ***
 
 document.querySelector('.back-btn').addEventListener('click', () => {
     showSection('home');
@@ -710,9 +703,9 @@ document.getElementById("close-sidebar").addEventListener('click', closeSidebar)
 document.addEventListener('DOMContentLoaded', () => {
     showSection('home');
 });
-</script>
 </body>
 </html>
+
 
 
 
