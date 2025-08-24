@@ -68,44 +68,75 @@
   <div id="ordersList"></div>
 
   <script>
-    // تحميل الطلبات من LocalStorage
-    function loadOrders() {
-      let orders = JSON.parse(localStorage.getItem("orders")) || [];
-      let listDiv = document.getElementById("ordersList");
-      listDiv.innerHTML = "";
+  // دالة لجلب الطلبات وعرضها
+function loadOrders() {
+    // نستخدم fetch لجلب البيانات من الخادم (الـ API)
+    fetch('http://localhost:3000/api/v1/orders')
+        .then(response => {
+            if (!response.ok) {
+                // إذا لم يكن الرد ناجحًا، نُظهر رسالة خطأ
+                throw new Error('فشل جلب الطلبات من الخادم');
+            }
+            return response.json();
+        })
+        .then(orders => {
+            let listDiv = document.getElementById("ordersList");
+            listDiv.innerHTML = ""; // نمسح المحتوى القديم
 
-      if (orders.length === 0) {
-        listDiv.innerHTML = "<p class='empty'>لا توجد طلبات حالياً 🚫</p>";
-        return;
-      }
+            if (orders.length === 0) {
+                listDiv.innerHTML = "<p class='empty'>لا توجد طلبات حالياً 🚫</p>";
+                return;
+            }
 
-      orders.forEach((order, index) => {
-        let div = document.createElement("div");
-        div.className = "order";
-        div.innerHTML = `
-          <h3>🪑 طاولة رقم: ${order.table}</h3>
-          <p>🍽️ الطلب: ${order.items.join(", ")}</p>
-          <p>📝 ملاحظات: ${order.notes}</p>
-          <button class="btn" onclick="markPrepared(${index})">✅ تم التحضير</button>
-        `;
-        listDiv.appendChild(div);
-      });
-    }
+            orders.forEach(order => {
+                let div = document.createElement("div");
+                div.className = "order";
+                div.innerHTML = `
+                    <h3>🪑 طاولة رقم: ${order.table}</h3>
+                    <p>🍽️ الطلب: ${order.items.map(item => item.name).join(", ")}</p>
+                    <p>📝 ملاحظات: ${order.notes || "لا يوجد"}</p>
+                    <p>💲 الإجمالي: ${order.total.toFixed(2)}$</p>
+                    <button class="btn" onclick="markPrepared(${order.id})">✅ تم التحضير</button>
+                `;
+                listDiv.appendChild(div);
+            });
+        })
+        .catch(error => {
+            console.error('خطأ في الاتصال بالخادم:', error);
+            document.getElementById("ordersList").innerHTML = "<p class='empty' style='color:red;'>⚠️ فشل الاتصال بالخادم. تأكد من تشغيله.</p>";
+        });
+}
 
-    // عند تجهيز الطلب → نحذفه
-    function markPrepared(i) {
-      let orders = JSON.parse(localStorage.getItem("orders")) || [];
-      orders.splice(i, 1); // حذف الطلب
-      localStorage.setItem("orders", JSON.stringify(orders));
-      loadOrders();
-    }
+// دالة لحذف الطلب من الخادم عند الضغط على "تم التحضير"
+function markPrepared(orderId) {
+    // نستخدم fetch مع method: 'DELETE' لإرسال طلب حذف
+    fetch(`http://localhost:3000/api/v1/orders/${orderId}`, {
+        method: 'DELETE',
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('فشل في حذف الطلب من الخادم');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data.message);
+        loadOrders(); // بعد الحذف، نعيد تحميل الطلبات من جديد
+    })
+    .catch(error => {
+        console.error('خطأ:', error);
+        alert('❌ فشل في حذف الطلب.');
+    });
+}
 
-    // تحميل الطلبات عند فتح الصفحة
-    loadOrders();
+// عند تحميل الصفحة، نطلب تحميل الطلبات لأول مرة
+document.addEventListener('DOMContentLoaded', loadOrders);
 
-    // تحديث تلقائي كل 5 ثواني (في حال في طلب جديد)
-    setInterval(loadOrders, 5000);
+// تحديث تلقائي كل 5 ثواني
+setInterval(loadOrders, 5000);
+      
   </script>
 
 </body>
 </html>
+
