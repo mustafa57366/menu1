@@ -437,254 +437,283 @@
     <a href="https://instagram.com/mostafa_syr_573" target="_blank" class="insta-icon">
         <i class="fab fa-instagram fa-2x" style="color: #6a1b2a;"></i>
     </a>
-
     <script>
-        const menuData = {
-            cocktails: [
-                { id: 1, name: 'كوكتيل ب كاكاو', image: '1.jpg', price: 12 },
-                { id: 2, name: 'كوكتيل بالفراولة', image: '2.jpg', price: 10 },
-                { id: 3, name: 'كوكتيل بالتوت', image: '4.jpg', price: 11 },
-                { id: 4, name: 'كوكتيل ب كاكاو وتوت', image: '5.jpg', price: 14 },
-                { id: 5, name: 'كوكتيل بالمانجو', image: '6.jpg', price: 10 },
-                { id: 6, name: 'كوكتيل مشكلة بالخضراوات', image: '7.jpg', price: 13 },
-                { id: 7, name: 'كوكتيل بالأوريو', image: '8.jpg', price: 15 },
-            ],
-            food: [
-                { id: 8, name: 'دجاج مقرمش', image: 'hood1.jpg', price: 25 },
-                { id: 9, name: 'برغر بروستد', image: 'food2.jpg', price: 18 },
-                { id: 10, name: 'أصابع دجاج مقرمش', image: 'food3.jpg', price: 20 },
-                { id: 11, name: 'كباب', image: 'food4.jpg', price: 30 },
-                { id: 12, name: 'شيش طاووق', image: 'food5.jpg', price: 28 },
-                { id: 13, name: 'ستيك', image: 'food6.jpg', price: 45 },
-                { id: 14, name: 'دجاج مشوي', image: 'food7.jpg', price: 22 },
-            ],
-            desserts: [
-                { id: 15, name: 'حلوى بالتوت البري', image: 'l1.jpg', price: 8 },
-                { id: 16, name: 'كيك بالكاكاو والحليب', image: 'l2.jpg', price: 9 },
-                { id: 17, name: 'كيك بالكاكاو والفراولة', image: 'l3.jpg', price: 10 },
-                { id: 18, name: 'كيك فراولة', image: 'l4.jpg', price: 9 },
-                { id: 19, name: 'كنافة', image: 'l5.jpg', price: 11 },
-            ],
-            coffee: [
-                { id: 20, name: 'كابتشينو', image: 'coffe.jpg', price: 5 },
-                { id: 21, name: 'قهوة باردة', image: 'ice-coffe.jpg', price: 6 },
-                { id: 22, name: 'أمريكانو', image: 'ice-cofe.jpg', price: 4 },
-            ],
-            "ice-cream": [
-                { id: 23, name: 'آيس كريم بالحليب', image: 'ice-cream.jpg', price: 7 },
-                { id: 24, name: 'آيس كريم بالفراولة', image: 'ice-cream3.jpg', price: 7 },
-                { id: 25, name: 'آيس كريم بالكراميل', image: 'ice-cream4.jpg', price: 8 },
-                { id: 26, name: 'آيس كريم بالكاكاو والحليب', image: 'ice-cream5.jpg', price: 9 },
-                { id: 27, name: 'آيس كريم بالكاكاو', image: 'ice-cream6.jpg', price: 7 },
-                { id: 28, name: 'آيس كريم بالفراولة', image: 'ice-cream7.jpg', price: 7 },
-                { id: 29, name: 'آيس كريم بالكاكاو والحليب', image: 'ice-cream8.jpg', price: 9 },
-                { id: 30, name: 'آيس كريم بالتوت البري', image: 'ice-cream9.jpg', price: 8 },
-            ]
-        };
+const menuData = {
+    cocktails: [
+        { id: 1, name: 'كوكتيل ب كاكاو', image: '1.jpg', price: 12 },
+        { id: 2, name: 'كوكتيل بالفراولة', image: '2.jpg', price: 10 },
+        { id: 3, name: 'كوكتيل بالتوت', image: '4.jpg', price: 11 },
+        { id: 4, name: 'كوكتيل ب كاكاو وتوت', image: '5.jpg', price: 14 },
+        { id: 5, name: 'كوكتيل بالمانجو', image: '6.jpg', price: 10 },
+        { id: 6, name: 'كوكتيل مشكلة بالخضراوات', image: '7.jpg', price: 13 },
+        { id: 7, name: 'كوكتيل بالأوريو', image: '8.jpg', price: 15 },
+    ],
+    food: [
+        { id: 8, name: 'دجاج مقرمش', image: 'hood1.jpg', price: 25 },
+        { id: 9, name: 'برغر بروستد', image: 'food2.jpg', price: 18 },
+        { id: 10, name: 'أصابع دجاج مقرمش', image: 'food3.jpg', price: 20 },
+        { id: 11, name: 'كباب', image: 'food4.jpg', price: 30 },
+        { id: 12, name: 'شيش طاووق', image: 'food5.jpg', price: 28 },
+        { id: 13, name: 'ستيك', image: 'food6.jpg', price: 45 },
+        { id: 14, name: 'دجاج مشوي', image: 'food7.jpg', price: 22 },
+    ],
+    desserts: [
+        { id: 15, name: 'حلوى بالتوت البري', image: 'l1.jpg', price: 8 },
+        { id: 16, name: 'كيك بالكاكاو والحليب', image: 'l2.jpg', price: 9 },
+        { id: 17, name: 'كيك بالكاكاو والفراولة', image: 'l3.jpg', price: 10 },
+        { id: 18, name: 'كيك فراولة', image: 'l4.jpg', price: 9 },
+        { id: 19, name: 'كنافة', image: 'l5.jpg', price: 11 },
+    ],
+    coffee: [
+        { id: 20, name: 'كابتشينو', image: 'coffe.jpg', price: 5 },
+        { id: 21, name: 'قهوة باردة', image: 'ice-coffe.jpg', price: 6 },
+        { id: 22, name: 'أمريكانو', image: 'ice-cofe.jpg', price: 4 },
+    ],
+    "ice-cream": [
+        { id: 23, name: 'آيس كريم بالحليب', image: 'ice-cream.jpg', price: 7 },
+        { id: 24, name: 'آيس كريم بالفراولة', image: 'ice-cream3.jpg', price: 7 },
+        { id: 25, name: 'آيس كريم بالكراميل', image: 'ice-cream4.jpg', price: 8 },
+        { id: 26, name: 'آيس كريم بالكاكاو والحليب', image: 'ice-cream5.jpg', price: 9 },
+        { id: 27, name: 'آيس كريم بالكاكاو', image: 'ice-cream6.jpg', price: 7 },
+        { id: 28, name: 'آيس كريم بالفراولة', image: 'ice-cream7.jpg', price: 7 },
+        { id: 29, name: 'آيس كريم بالكاكاو والحليب', image: 'ice-cream8.jpg', price: 9 },
+        { id: 30, name: 'آيس كريم بالتوت البري', image: 'ice-cream9.jpg', price: 8 },
+    ]
+};
 
-        const allMenuItems = {};
-        Object.values(menuData).forEach(category => {
-            category.forEach(item => {
-                allMenuItems[item.id] = item;
-            });
+const allMenuItems = {};
+Object.values(menuData).forEach(category => {
+    category.forEach(item => {
+        allMenuItems[item.id] = item;
+    });
+});
+
+const cart = {};
+
+function createMenuItem(item) {
+    const div = document.createElement('div');
+    div.classList.add('menu-item');
+    div.setAttribute('data-item-id', item.id);
+    div.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <h3>${item.name}</h3>
+        <p>السعر: ${item.price}$</p>
+    `;
+    return div;
+}
+
+function updateCartCount() {
+    const totalItems = Object.keys(cart).length;
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    if (totalItems > 0) {
+        checkoutBtn.textContent = `اتمام الطلب (${totalItems})`;
+    } else {
+        checkoutBtn.textContent = 'اتمام الطلب';
+    }
+}
+
+function renderMenu(categoryName) {
+    document.querySelectorAll('.menu-items-grid').forEach(grid => grid.innerHTML = '');
+    const container = document.querySelector(`#${categoryName} .menu-items-grid`);
+    if (container && menuData[categoryName]) {
+        menuData[categoryName].forEach((item, index) => {
+            const menuItem = createMenuItem(item);
+            menuItem.style.animationDelay = `${index * 0.1}s`;
+            if (cart[item.id]) {
+                menuItem.classList.add('selected');
+            }
+            container.appendChild(menuItem);
         });
+    }
+}
 
-        const cart = {};
-        
-        function createMenuItem(item) {
-            const div = document.createElement('div');
-            div.classList.add('menu-item');
-            div.setAttribute('data-item-id', item.id);
-            div.innerHTML = `
-                <img src="${item.image}" alt="${item.name}">
-                <h3>${item.name}</h3>
-                <p>السعر: ${item.price}$</p>
-            `;
-            return div;
-        }
+function renderCheckoutPage() {
+    const checkoutList = document.querySelector('.checkout-items');
+    const totalElement = document.querySelector('#checkout-page .total-price span');
+    checkoutList.innerHTML = '';
+    let totalPrice = 0;
+    const selectedItemIds = Object.keys(cart);
 
-        function updateCartCount() {
-            const totalItems = Object.keys(cart).length;
-            const checkoutBtn = document.querySelector('.checkout-btn');
-            if (totalItems > 0) {
-                checkoutBtn.textContent = `اتمام الطلب (${totalItems})`;
-            } else {
-                checkoutBtn.textContent = 'اتمام الطلب';
+    if (selectedItemIds.length === 0) {
+        checkoutList.innerHTML = '<li style="text-align: center; color: #777;">سلة المشتريات فارغة.</li>';
+        document.querySelector('.confirm-order-btn').disabled = true;
+    } else {
+        document.querySelector('.confirm-order-btn').disabled = false;
+        selectedItemIds.forEach(itemId => {
+            const item = allMenuItems[itemId];
+            if (item) {
+                const li = document.createElement('li');
+                li.classList.add('checkout-item');
+                li.innerHTML = `<span>${item.name}</span><span>${item.price}$</span>`;
+                checkoutList.appendChild(li);
+                totalPrice += item.price;
             }
-        }
-
-        function renderMenu(categoryName) {
-            document.querySelectorAll('.menu-items-grid').forEach(grid => grid.innerHTML = '');
-            const container = document.querySelector(`#${categoryName} .menu-items-grid`);
-            if (container && menuData[categoryName]) {
-                menuData[categoryName].forEach((item, index) => {
-                    const menuItem = createMenuItem(item);
-                    menuItem.style.animationDelay = `${index * 0.1}s`;
-                    if (cart[item.id]) {
-                        menuItem.classList.add('selected');
-                    }
-                    container.appendChild(menuItem);
-                });
-            }
-        }
-
-        function renderCheckoutPage() {
-            const checkoutList = document.querySelector('.checkout-items');
-            const totalElement = document.querySelector('#checkout-page .total-price span');
-            checkoutList.innerHTML = '';
-            let totalPrice = 0;
-            const selectedItemIds = Object.keys(cart);
-
-            if (selectedItemIds.length === 0) {
-                checkoutList.innerHTML = '<li style="text-align: center; color: #777;">سلة المشتريات فارغة.</li>';
-                document.querySelector('.confirm-order-btn').disabled = true;
-            } else {
-                document.querySelector('.confirm-order-btn').disabled = false;
-                selectedItemIds.forEach(itemId => {
-                    const item = allMenuItems[itemId];
-                    if (item) {
-                        const li = document.createElement('li');
-                        li.classList.add('checkout-item');
-                        li.innerHTML = `<span>${item.name}</span><span>${item.price}$</span>`;
-                        checkoutList.appendChild(li);
-                        totalPrice += item.price;
-                    }
-                });
-            }
-            totalElement.textContent = `${totalPrice}$`;
-        }
-        
-        function renderOrderReceptionPage() {
-            const receptionList = document.querySelector('.reception-items');
-            const totalElement = document.querySelector('#order-reception-page .total-price span');
-            receptionList.innerHTML = '';
-            let totalPrice = 0;
-            const selectedItemIds = Object.keys(cart);
-            
-            selectedItemIds.forEach(itemId => {
-                const item = allMenuItems[itemId];
-                if (item) {
-                    const li = document.createElement('li');
-                    li.classList.add('reception-item');
-                    li.innerHTML = `<span>${item.name}</span><span>${item.price}$</span>`;
-                    receptionList.appendChild(li);
-                    totalPrice += item.price;
-                }
-            });
-            totalElement.textContent = `${totalPrice}$`;
-        }
-        
-        function hideAllSections() {
-            document.querySelectorAll('.menu-section').forEach(section => {
-                section.classList.remove('active');
-            });
-        }
-        
-        function showSection(targetId) {
-            hideAllSections();
-            document.querySelectorAll('.sidebar a').forEach(link => {
-                link.classList.remove('active-link');
-            });
-            const activeLink = document.querySelector(`.sidebar a[data-target="${targetId}"]`);
-            if (activeLink) {
-                activeLink.classList.add('active-link');
-            }
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                targetSection.classList.add('active');
-                if (targetId !== "home" && targetId !== "checkout-page" && targetId !== "order-reception-page") {
-                    renderMenu(targetId);
-                } else if (targetId === "checkout-page") {
-                    renderCheckoutPage();
-                } else if (targetId === "order-reception-page") {
-                    renderOrderReceptionPage();
-                }
-            }
-        }
-
-        document.querySelectorAll('.sidebar a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('data-target');
-                if (targetId) {
-                    showSection(targetId);
-                    closeSidebar();
-                }
-            });
         });
-        
-        document.querySelector('.checkout-btn').addEventListener('click', (e) => {
-            e.preventDefault();
-            showSection('checkout-page');
+    }
+    totalElement.textContent = `${totalPrice}$`;
+}
+
+// *** تم تعديل هذه الدالة لإرسال الطلب إلى API بدلاً من localStorage ***
+function confirmOrder() {
+    const selectedItemIds = Object.keys(cart);
+    if (selectedItemIds.length === 0) return;
+
+    const tableNumber = prompt("🪑 أدخل رقم الطاولة:");
+    const orderData = {
+        table: tableNumber || "غير محدد",
+        items: selectedItemIds.map(id => ({
+            id: allMenuItems[id].id,
+            name: allMenuItems[id].name,
+            price: allMenuItems[id].price
+        })),
+        notes: "",
+        total: selectedItemIds.reduce((sum, id) => sum + allMenuItems[id].price, 0),
+    };
+
+    // إرسال الطلب إلى خادم API
+    fetch('http://localhost:3000/api/v1/orders', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('فشل إرسال الطلب');
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert('✅ تم استلام طلبك بنجاح! ');
+        console.log('الطلب:', data.order);
+        // مسح سلة المشتريات بعد إرسال الطلب
+        for (const key in cart) { delete cart[key]; }
+        updateCartCount(); // تحديث عدد العناصر في السلة
+        showSection('home'); // العودة إلى الصفحة الرئيسية
+    })
+    .catch((error) => {
+        console.error('حدث خطأ:', error);
+        alert('❌ فشل إرسال الطلب. يرجى المحاولة مرة أخرى.');
+    });
+}
+// *** نهاية التعديل ***
+
+function renderOrderReceptionPage() {
+    const receptionList = document.querySelector('.reception-items');
+    const totalElement = document.querySelector('#order-reception-page .total-price span');
+    receptionList.innerHTML = '';
+    let totalPrice = 0;
+    const selectedItemIds = Object.keys(cart);
+
+    selectedItemIds.forEach(itemId => {
+        const item = allMenuItems[itemId];
+        if (item) {
+            const li = document.createElement('li');
+            li.classList.add('reception-item');
+            li.innerHTML = `<span>${item.name}</span><span>${item.price}$</span>`;
+            receptionList.appendChild(li);
+            totalPrice += item.price;
+        }
+    });
+    totalElement.textContent = `${totalPrice}$`;
+}
+
+function hideAllSections() {
+    document.querySelectorAll('.menu-section').forEach(section => {
+        section.classList.remove('active');
+    });
+}
+
+function showSection(targetId) {
+    hideAllSections();
+    document.querySelectorAll('.sidebar a').forEach(link => {
+        link.classList.remove('active-link');
+    });
+    const activeLink = document.querySelector(`.sidebar a[data-target="${targetId}"]`);
+    if (activeLink) {
+        activeLink.classList.add('active-link');
+    }
+    const targetSection = document.getElementById(targetId);
+    if (targetSection) {
+        targetSection.classList.add('active');
+        if (targetId !== "home" && targetId !== "checkout-page" && targetId !== "order-reception-page") {
+            renderMenu(targetId);
+        } else if (targetId === "checkout-page") {
+            renderCheckoutPage();
+        } else if (targetId === "order-reception-page") {
+            renderOrderReceptionPage();
+        }
+    }
+}
+
+document.querySelectorAll('.sidebar a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('data-target');
+        if (targetId) {
+            showSection(targetId);
             closeSidebar();
-        });
-
-        document.querySelector('.confirm-order-btn').addEventListener('click', () => {
-            const selectedItemIds = Object.keys(cart);
-            if (selectedItemIds.length === 0) return;
-
-            const tableNumber = prompt("🪑 أدخل رقم الطاولة:");
-            const order = {
-                table: tableNumber || "غير محدد",
-                items: selectedItemIds.map(id => allMenuItems[id].name),
-                notes: "",
-                total: selectedItemIds.reduce((sum, id) => sum + allMenuItems[id].price, 0),
-                timestamp: Date.now()
-            };
-
-            let orders = JSON.parse(localStorage.getItem("orders")) || [];
-            orders.push(order);
-            localStorage.setItem("orders", JSON.stringify(orders));
-
-            showSection('order-reception-page');
-        });
-
-        document.querySelector('.back-btn').addEventListener('click', () => {
-            showSection('home');
-        });
-
-        document.querySelector('.new-order-btn').addEventListener('click', () => {
-            for (const key in cart) {
-                delete cart[key];
-            }
-            updateCartCount();
-            document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('selected'));
-            showSection('home');
-        });
-
-        document.addEventListener('click', (event) => {
-            const target = event.target.closest('.menu-item');
-            if (target) {
-                const itemId = target.getAttribute('data-item-id');
-                if (cart[itemId]) {
-                    delete cart[itemId];
-                    target.classList.remove('selected');
-                } else {
-                    cart[itemId] = 1;
-                    target.classList.add('selected');
-                }
-                updateCartCount();
-            }
-        });
-
-        function openSidebar() {
-            document.getElementById("sidebar").classList.add('open');
         }
+    });
+});
 
-        function closeSidebar() {
-            document.getElementById("sidebar").classList.remove('open');
+document.querySelector('.checkout-btn').addEventListener('click', (e) => {
+    e.preventDefault();
+    showSection('checkout-page');
+    closeSidebar();
+});
+
+// *** تغيير المستمع لزر التأكيد ***
+document.querySelector('.confirm-order-btn').addEventListener('click', confirmOrder);
+// *** نهاية التغيير ***
+
+document.querySelector('.back-btn').addEventListener('click', () => {
+    showSection('home');
+});
+
+document.querySelector('.new-order-btn').addEventListener('click', () => {
+    for (const key in cart) {
+        delete cart[key];
+    }
+    updateCartCount();
+    document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('selected'));
+    showSection('home');
+});
+
+document.addEventListener('click', (event) => {
+    const target = event.target.closest('.menu-item');
+    if (target) {
+        const itemId = target.getAttribute('data-item-id');
+        if (cart[itemId]) {
+            delete cart[itemId];
+            target.classList.remove('selected');
+        } else {
+            cart[itemId] = 1;
+            target.classList.add('selected');
         }
+        updateCartCount();
+    }
+});
 
-        document.getElementById("sidebar-toggle").addEventListener('click', openSidebar);
-        document.getElementById("close-sidebar").addEventListener('click', closeSidebar);
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            showSection('home');
-        });
+function openSidebar() {
+    document.getElementById("sidebar").classList.add('open');
+}
 
-    </script>
+function closeSidebar() {
+    document.getElementById("sidebar").classList.remove('open');
+}
+
+document.getElementById("sidebar-toggle").addEventListener('click', openSidebar);
+document.getElementById("close-sidebar").addEventListener('click', closeSidebar);
+
+document.addEventListener('DOMContentLoaded', () => {
+    showSection('home');
+});
+</script>
 </body>
 </html>
+
 
 
 
